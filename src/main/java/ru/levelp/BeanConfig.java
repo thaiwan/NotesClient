@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Created by Tanya on 16.12.2016.
@@ -29,7 +30,14 @@ public class BeanConfig {
     @Bean
     public URI wsUri() {
         try {
-            return new URI("ws:/")
+            return new URI("ws://localhost:8080/");
+        } catch (URISyntaxException ignored) {
         }
+        return null;
+    }
+
+    @Bean
+    public Integer poolSize() {
+        return 4;
     }
 }

@@ -1,10 +1,15 @@
 package ru.levelp.model;
 
+import ru.levelp.model.entities.User;
+
+import java.util.List;
+
 /**
  * Created by Tanya on 16.12.2016.
  */
 public interface Api {
-    void authorize(String email, String pwdHash);//перечисляем все методы, которые можно вызвать у сервера
-    void registration(String name, String email, String pwdHash);
-    void getUsers();//не возвращается, потому что выполнение переходит в фоновый поток
+    //TODO: add all methods
+    void authorize(String email, String pwdHash, Callback<String> onSuccess, Callback<String> onError);
+    void registration(String name, String email, String pwdHash,  Callback<String> onSuccess, Callback<String> onError);
+    void getUsers(Callback<List<User>> onSuccess, Callback<String> onError);
 }

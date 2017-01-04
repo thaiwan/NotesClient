@@ -19,27 +19,22 @@ public class ConsoleView implements View {
         this.console = concole;
     }
 
-    @Override
     public void showMessage(String text) {
         System.out.println(text);
     }
 
-    @Override
     public void showLoading() {
         System.out.println("Please, wait... ");
     }
 
-    @Override
     public void showLoadingDone() {
         System.out.println("Done");
     }
 
-    @Override
     public void showLoadingError(String reason) {
         System.out.println("Error " + reason);
     }
 
-    @Override
     public String read(String message) {
         System.out.println(message);
         String input = null;
