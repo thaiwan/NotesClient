@@ -12,19 +12,4 @@ public class AuthPayload {
         this.pwdHash = pwdHash;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPwdHash() {
-        return pwdHash;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPwdHash(String pwdHash) {
-        this.pwdHash = pwdHash;
-    }
 }

@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="LevelUpNotesClient" />
+        <module name="NotesClient" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="LevelUpNotesClient" target="1.8" />
+      <module name="NotesClient" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -5,7 +5,7 @@ package ru.levelp.model;
  */
 @FunctionalInterface
 public interface Callback<T> {
-    void call(T result);//функц интерф - который реализ 1 метод
+    void call(T result);
 }
 
 
