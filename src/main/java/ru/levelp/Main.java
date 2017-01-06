@@ -5,48 +5,38 @@ import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.concurrent.*;
 
 /**
  * Created by Tanya on 16.12.2016.
  */
 public class Main {
     public static void main(String[] args) {
-        for (int i = 0; i < 3; i++) {
-
-            try {
-
-                int finalI = i;
-
-                WebSocketClient client = new WebSocketClient(new  URI("ws://localhost:8080")) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        for (int i = 0; i < 100; i++) {
+            int finalI = i;
+            long mills = (long) (Math.random() * 1000 + 1000);
+            Future<String> task = executor.submit(new Callable<String>() {
                 @Override
-                public void onOpen(ServerHandshake serverHandshake) {
-                System.out.println("connected");
-
-                for (int j = 0; j < 10 ; j++) {
-                    send("client " + finalI +" message " + j);
+                public String call() throws Exception {
+                    try {
+                        Thread.sleep(mills);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return "Some operation " + finalI + " time: " + mills + " in thread: " + Thread.currentThread().getName();
                 }
+            });
+            try {
+                String result = task.get(1500, TimeUnit.MILLISECONDS);
+                System.out.println(result);
+            } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                System.out.println("Operation " + finalI + " timeout " + mills);
             }
-
-            @Override
-            public void onMessage(String s) {
-                System.out.println("server " + s);
-            }
-
-            @Override
-            public void onClose(int i, String s, boolean b) {
-
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-            }
-        };
-        client.connect();
-    } catch (URISyntaxException e) {
-        e.printStackTrace();
         }
-        }
+//        List<Runnable> list = executor.shutdownNow();
+//        System.out.println("Not executed: " + list.size());
+        executor.shutdown();
     }
 }
 

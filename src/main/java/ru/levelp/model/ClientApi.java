@@ -27,7 +27,13 @@ public class ClientApi implements Api {
         AuthPayload payload = new AuthPayload(email, pwdHash);
         wsClient.sendRequest("authorize", payload, null,
                 new TypeToken<ResponseContainer<String>>() {
-                }.getType(), onSuccess, onError);
+                }.getType(), new Callback<String>() {
+                    @Override
+                    public void call(String result) {
+                        token = result;
+                        onSuccess.call(result);
+                    }
+                }, onError);
     }
 
     public void registration(String name, String email, String pwdHash, Callback<String> onSuccess, Callback<String> onError) {
