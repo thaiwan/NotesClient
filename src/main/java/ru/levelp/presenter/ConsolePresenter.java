@@ -19,6 +19,7 @@ public class ConsolePresenter implements Presenter {
     public void setView(View view) {
         this.view = view;
         authorize();
+        System.out.println("setView");
         //вступительное меню автор регистр вых
     }
 
