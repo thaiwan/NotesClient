@@ -47,5 +47,6 @@ public class ClientApi implements Api {
         wsClient.sendRequest("getUsers", null, token,
                 new TypeToken<ResponseContainer<String>>() {
                 }.getType(), onSuccess, onError);
+
     }
 }
