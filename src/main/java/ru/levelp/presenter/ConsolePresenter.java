@@ -19,7 +19,6 @@ public class ConsolePresenter implements Presenter {
     public void setView(View view) {
         this.view = view;
         authorize();
-        System.out.println("setView");
         //вступительное меню автор регистр вых
     }
 
@@ -31,7 +30,7 @@ public class ConsolePresenter implements Presenter {
     private void authorize(){
         //TODO: спрашиваем авторизацию или регистрацию. С промощью метода read() просим у view данные пользователя
         String answer = view.read("1 - Autorization\n" +
-                 "2 - Registration\n" +
+                "2 - Registration\n" +
                 "3 - Quit");
         String email = null;
         String pwd = null;
@@ -45,6 +44,9 @@ public class ConsolePresenter implements Presenter {
                 new Callback<String>() {
                     @Override
                     public void call(String result) {
+                        System.out.println("1 - Create note\n" +
+                        "2 - Show notes\n" +
+                        "3 - Quit");
                         //show menu
                     }
                 }, new Callback<String>() {
