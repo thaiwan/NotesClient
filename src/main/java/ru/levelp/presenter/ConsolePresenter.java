@@ -32,30 +32,53 @@ public class ConsolePresenter implements Presenter {
         String answer = view.read("1 - Autorization\n" +
                 "2 - Registration\n" +
                 "3 - Quit");
-        String email = null;
-        String pwd = null;
+        String name;
+        String email;
+        String pwd;
 
         if (answer.equals("1")) {
             email = view.read("Enter your email");
             pwd = view.read("Enter password");//TODO: сделать хэширование pwd = sha5(pwd)
+            api.authorize(email, pwd,
+                    new Callback<String>() {
+                        @Override
+                        public void call(String result) {
+                            // token = result;
+
+                            String selectActions = view.read("1 - Create note\n" +
+                                    "2 - Show notes\n" +
+                                    "3 - Quit");
+                        }
+                    }, new Callback<String>() {
+                        @Override
+                        public void call(String result) {
+                            //auth error
+                        }
+                    });
         } //TODO: получение email pwd, проверка что такие существуют
 
-        api.authorize(email, pwd,
-                new Callback<String>() {
-                    @Override
-                    public void call(String result) {
-                        // token = result;
+        if (answer.equals("2")) {
+            name = view.read("Enter your name");
+            email = view.read("Enter your email");
+            pwd = view.read("Enter password");//TODO: сделать хэширование pwd = sha5(pwd)
+            api.registration(name, email, pwd,
+                    new Callback<String>() {
+                        @Override
+                        public void call(String result) {
+                            // token = result;
 
-                        String selectActions = view.read("1 - Create note\n" +
-                        "2 - Show notes\n" +
-                        "3 - Quit");
-                    }
-                }, new Callback<String>() {
-                    @Override
-                    public void call(String result) {
-                        //auth error
-                    }
-                });
+                            String selectActions = view.read("1 - Create note\n" +
+                                    "2 - Show notes\n" +
+                                    "3 - Quit");
+                        }
+                    }, new Callback<String>() {
+                        @Override
+                        public void call(String result) {
+                            //auth error
+                        }
+                    });
+        }
+
 
 //        api.getUsers(new Callback<List<User>>() {
 //            @Override
