@@ -28,11 +28,11 @@ public class ClientApi implements Api {
         wsClient.sendRequest("authorize", payload, null,
                 new TypeToken<ResponseContainer<String>>() {
                 }.getType(), new Callback<String>() {
-                    @Override
-                    public void call(String result) {
-                        token = result;
-                        onSuccess.call(result);
-                    }
+                        @Override
+                        public void call(String result) {
+                            token = result;
+                            onSuccess.call(result);
+                        }
                 }, onError);
     }
 
@@ -40,7 +40,13 @@ public class ClientApi implements Api {
         RegisterPayload payload = new RegisterPayload(email, pwdHash, name);
         wsClient.sendRequest("registration", payload, null,
                 new TypeToken<ResponseContainer<String>>() {
-                }.getType(), onSuccess, onError);
+                }.getType(), new Callback<String>() {
+                    @Override
+                    public void call(String result) {
+                        token = result;
+                        onSuccess.call(result);
+                    }
+                }, onError);
     }
 
     public void getUsers(Callback<List<User>> onSuccess, Callback<String> onError) {

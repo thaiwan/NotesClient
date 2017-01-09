@@ -44,10 +44,11 @@ public class ConsolePresenter implements Presenter {
                 new Callback<String>() {
                     @Override
                     public void call(String result) {
-                        System.out.println("1 - Create note\n" +
+                        // token = result;
+
+                        String selectActions = view.read("1 - Create note\n" +
                         "2 - Show notes\n" +
                         "3 - Quit");
-                        //show menu
                     }
                 }, new Callback<String>() {
                     @Override
